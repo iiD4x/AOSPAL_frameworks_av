@@ -75,20 +75,21 @@ LOCAL_MODULE:= libaudioflinger
 
 LOCAL_SRC_FILES += FastMixer.cpp FastMixerState.cpp AudioWatchdog.cpp
 
-LOCAL_CFLAGS += -DSTATE_QUEUE_INSTANTIATIONS='"StateQueueInstantiations.cpp"'
+LOCAL_CFLAGS += -DSTATE_QUEUE_INSTANTIATIONS='"StateQueueInstantiations.cpp"' -fno-strict-aliasing
 
 # Define ANDROID_SMP appropriately. Used to get inline tracing fast-path.
 ifeq ($(TARGET_CPU_SMP),true)
-    LOCAL_CFLAGS += -DANDROID_SMP=1
+    LOCAL_CFLAGS += -DANDROID_SMP=1 -fno-strict-aliasing
 else
-    LOCAL_CFLAGS += -DANDROID_SMP=0
+    LOCAL_CFLAGS += -DANDROID_SMP=0 -fno-strict-aliasing
 endif
 
 ifeq ($(BOARD_HAVE_PRE_KITKAT_AUDIO_BLOB),true)
     LOCAL_CFLAGS += -DHAVE_PRE_KITKAT_AUDIO_BLOB
 endif
 
-LOCAL_CFLAGS += -fvisibility=hidden
+LOCAL_CFLAGS += -fvisibility=hidden -fno-strict-aliasing
+
 ifeq ($(strip $(BOARD_USES_SRS_TRUEMEDIA)),true)
 LOCAL_SHARED_LIBRARIES += libsrsprocessing
 LOCAL_CFLAGS += -DSRS_PROCESSING
