@@ -168,7 +168,7 @@ endif #TARGET_ENABLE_AV_ENHANCEMENTS
 
 LOCAL_SRC_FILES += \
         chromium_http_stub.cpp
-LOCAL_CPPFLAGS += -DCHROMIUM_AVAILABLE=1
+LOCAL_CPPFLAGS += -DCHROMIUM_AVAILABLE=1 -fno-strict-aliasing
 
 LOCAL_SHARED_LIBRARIES += libstlport
 include external/stlport/libstlport.mk
@@ -179,7 +179,7 @@ LOCAL_SHARED_LIBRARIES += \
         libstagefright_foundation \
         libdl
 
-LOCAL_CFLAGS += -Wno-multichar
+LOCAL_CFLAGS += -Wno-multichar -fno-strict-aliasing
 
 ifeq ($(BOARD_USE_SAMSUNG_COLORFORMAT), true)
 LOCAL_CFLAGS += -DUSE_SAMSUNG_COLORFORMAT
